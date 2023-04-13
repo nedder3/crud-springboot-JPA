@@ -20,7 +20,7 @@ public class StudentService {
         return  null;
     }
 
-    public Page<Student> getAllStudents(Integer page, Integer size,boolean enablePagination){
+    public Page<Student> getAllStudent(Integer page, Integer size,Boolean enablePagination){
 
         return iStudentRepository.findAll(enablePagination ? PageRequest.of(page,size): Pageable.unpaged());
     }
@@ -38,4 +38,7 @@ public class StudentService {
         return null;
     }
 
+    public boolean existByid(Long id) {
+        return iStudentRepository.existsById(id);
+    }
 }
