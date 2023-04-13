@@ -1,7 +1,9 @@
 package com.nedder3.crud.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name="student")
 public class Student {
@@ -12,6 +14,6 @@ public class Student {
     private String lastname;
     private Integer age;
 
-    
+
 
 }
