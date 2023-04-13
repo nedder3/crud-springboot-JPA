@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class StudentService {
     @Autowired
@@ -40,5 +42,10 @@ public class StudentService {
 
     public boolean existByid(Long id) {
         return iStudentRepository.existsById(id);
+    }
+
+
+    public Optional<Student>findById(Long id ){
+        return  iStudentRepository.findById(id);
     }
 }

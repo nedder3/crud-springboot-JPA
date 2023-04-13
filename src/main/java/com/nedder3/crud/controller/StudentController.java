@@ -2,11 +2,14 @@ package com.nedder3.crud.controller;
 
 import com.nedder3.crud.model.Student;
 import com.nedder3.crud.service.StudentService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
@@ -15,8 +18,9 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping
-    public ResponseEntity<Student> saveStudent(@RequestBody Student student ){
-    return  null;
+    public ResponseEntity<Student> saveStudent(@Valid  @RequestBody Student student ){
+
+        return  ResponseEntity.status(HttpStatus.CREATED).body(studentService.saveStudent(student));
     }
 
     @GetMapping
@@ -33,9 +37,13 @@ public class StudentController {
         ResponseEntity.ok(!studentService.existByid(id));
     }
 
+    @GetMapping(value ="/{id}")
+    public ResponseEntity<Optional<Student>>  findStudentById(@PathVariable("id") Long  id ){
+        return  ResponseEntity.status(HttpStatus.OK).body(studentService.findById(id));
+    }
+
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Student student){
-       return null;
-    }
+        return  ResponseEntity.status(HttpStatus.CREATED).body(studentService.editStudent(student));    }
 
 }
